@@ -4,10 +4,11 @@
 > Developed as part of Coventry University | Module: 503IT Communication and Collaboration
 
 ---
+# Teacher Will is the best 
 
 ## 📖 Project Overview
 
-**pooki** is an interactive, browser-based educational game built with Flask (Python). It targets students aged **6–15** and combines eco/nature theming with four engaging mini-games designed to teach **cyber-security awareness**, **digital safety**, and **mathematics** in a fun, age-appropriate way.
+**pooki** is an interactive, browser-based educational game built with Flask (Python). It targets students aged **6–15** and combines eco/nature theming with four engaging mini-games designed to teach *.*cyber-security awareness**, **digital safety**, and **mathematics** in a fun, age-appropriate way.
 
 The project responds directly to the module client brief: *Cyber-Smart Gaming for Education* — producing a fully testable prototype that meets the accessibility, educational value, and replayability requirements set out by the client.
 
