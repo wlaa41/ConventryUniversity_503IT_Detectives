@@ -49,4 +49,4 @@ We also learned how to:
 
 ---
 
-Thank you 👍
+Thank you 
