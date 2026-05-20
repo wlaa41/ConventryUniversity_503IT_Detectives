@@ -1,0 +1,9 @@
+Here's a short recap of what we did today:
+we divided our teams with each roles of 6, named cyber detectives
+
+we uploaded three files from your pooki project: app.py, pooki.db, and README.md.
+I reviewed them and explained that pooki is a Flask-based eco-themed learning quiz hub for kids 6–12, with four games: auto-play Snake quiz, Math quiz, Eco Cyber-Security quiz, and a locked Memory Match (unlocks at 100 points).
+I summarized the auth flow (register, login, OTP email verification, forgot-password reset) and the SQLite storage setup.
+I flagged what's missing from your upload: the questions/ JSON files, the static/ folder (CSS + JS), and all templates/ HTML files — the app won't run without them.
+I noted a security issue: your Gmail address and app password are hard-coded in app.py and should be moved to environment variables.
+Also we have learned how to do commit, push, pull in github
