@@ -4,7 +4,7 @@
 > Developed as part of Coventry University | Module: 503IT Communication and Collaboration
 
 ---
-# Teacher Will is the best 
+# Teacher Will is the very best 
 
 ## 📖 Project Overview
 
