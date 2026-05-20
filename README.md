@@ -1,4 +1,4 @@
-# 🌿 pooki — Eco Learning Quiz Hub
+
 
 > **A child-friendly, eco-themed cyber-security and maths learning game for ages 6–15**
 > Developed as part of Coventry University | Module: 503IT Communication and Collaboration
