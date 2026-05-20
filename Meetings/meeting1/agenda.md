@@ -1,54 +1,17 @@
-```md
-# 📌 Daily Team Recap – Cyber Detectives
+Here's a short recap of what we did today:
 
-## 👥 Team Setup
-We divided our team into groups of 6 members and named the group **Cyber Detectives**.
+We divided our teams with each roles of 6, named cyber detectives
 
-## 📁 Project Files Uploaded
-We uploaded three main files from our *Pooki Project*:
-- `app.py`
-- `pooki.db`
-- `README.md`
+We uploaded three files from our pooki project: app.py, pooki.db, and README.md.
 
-## 📚 Project Overview
-I reviewed the files and explained that **Pooki** is a Flask-based eco-themed learning quiz hub designed for kids aged **6–12**.
+I reviewed them and explained that pooki is a Flask-based eco-themed learning quiz hub for kids 6–12, with four games: auto-play Snake quiz, Math quiz, Eco Cyber-Security quiz, and a locked Memory Match (unlocks at 100 points).
 
-It includes four mini-games:
-- 🐍 Auto-play Snake Quiz
-- ➕ Math Quiz
-- 🌱 Eco Cyber-Security Quiz
-- 🧠 Memory Match Game (locked until 100 points)
+I summarized the auth flow (register, login, OTP email verification, forgot-password reset) and the SQLite storage setup.
 
-## 🔐 Authentication System
-The app includes:
-- User registration
-- Login system
-- OTP email verification
-- Forgot-password reset functionality
+I flagged what's missing from our upload: the questions/ JSON files, the static/ folder (CSS + JS), and all templates/ HTML files — the app won't run without them.
 
-## 🗄️ Database Setup
-- Uses **SQLite** for storing user data and progress.
+I noted a security issue: your Gmail address and app password are hard-coded in app.py and should be moved to environment variables.
 
-## ⚠️ Missing Components
-We identified missing essential files required for the app to run:
-- Questions JSON files
-- `static/` folder (CSS & JavaScript)
-- `templates/` folder (HTML files)
+Also we have learned how to do commit, pus and pull in github
 
-Without these, the application will not function properly.
-
-## 🔒 Security Issue Found
-- Gmail address and app password are hard-coded inside `app.py`
-- This is a security risk
-- Should be moved to **environment variables**
-
-## 🧑‍💻 Git & GitHub Skills Learned
-We also learned how to:
-- Commit changes
-- Push to GitHub
-- Pull updates from repository
-
----
-
-Thank you 👍
-```
+Thankyou
