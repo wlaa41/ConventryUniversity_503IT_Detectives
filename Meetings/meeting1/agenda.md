@@ -1,3 +1,4 @@
+```md
 # 📌 Daily Team Recap – Cyber Detectives
 
 ## 👥 Team Setup
@@ -49,4 +50,5 @@ We also learned how to:
 
 ---
 
-Thank you 
+Thank you 👍
+```
