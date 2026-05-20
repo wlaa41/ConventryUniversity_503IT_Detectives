@@ -1,1 +1,25 @@
-Hello
+Agenda — Meeting 1 (20 May 2026)
+
+1. Welcome & Attendance (5 min)
+	- Roll call, note absences
+
+2. Review previous notes & actions (10 min)
+	- Quick status on open action items
+
+3. Project updates (15 min)
+	- Each member: 2–3 minute update
+
+4. Tasks, deadlines & owners (10 min)
+	- Assign next steps and owners
+
+5. Risks, blockers & support needed (10 min)
+	- Identify issues and escalation paths
+
+6. Any Other Business (AOB) (5 min)
+
+7. Summary & Next Meeting (5 min)
+	- Recap actions, owner, due dates
+
+Notes:
+ - Add any additional items before the meeting starts.
+ - Time allocations are suggested and adjustable.
