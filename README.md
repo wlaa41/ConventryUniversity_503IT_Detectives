@@ -1,218 +1,156 @@
+# 🛡️ Cyber-detectives — Eco Learning Quiz Hub
 
-
-> **A child-friendly, eco-themed cyber-security and maths learning game for ages 6–15**
-> Developed as part of Coventry University | Module: 503IT Communication and Collaboration
-
----
-
-## 📖 Project Overview
-
-**pooki** is an interactive, browser-based educational game built with Flask (Python). It targets students aged **6–15** and combines eco/nature theming with four engaging mini-games designed to teach *.*cyber-security awareness**, **digital safety**, and **mathematics** in a fun, age-appropriate way.
-
-The project responds directly to the module client brief: *Cyber-Smart Gaming for Education* — producing a fully testable prototype that meets the accessibility, educational value, and replayability requirements set out by the client.
+A Flask web app: an eco-themed learning hub for ages 6-12 with an auto-playing snake quiz, a math quiz, an eco-friendly cyber-security quiz, and an unlockable memory-match mini-game.
 
 ---
 
-## 🎮 The Games
-
-### 1. 🐍 Auto-Play Eco Snake Quiz
-
-The snake moves automatically — no keyboard control needed, keeping it accessible for young learners. Players focus entirely on answering **eco-themed maths questions**.
-
-- ✅ Correct answer → snake grows +1 segment, +10 points
-- ❌ Wrong or timed-out answer → snake shrinks
-- ☠️ Game over when the snake shrinks below minimum length
-- ⏱️ 1-minute timer per question
-
----
-
-### 2. ➗ Math Quiz
-
-A classic maths challenge with three difficulty levels:
-
-| Level | Content |
-|-------|---------|
-| **Easy** | Single-digit arithmetic |
-| **Medium** | Two-digit sums, multiplication tables, division |
-| **Hard** | BIDMAS, fractions, percentages, powers, simple algebra |
-
-- 10 points per correct answer
-- 1-minute timer per question
-
----
-
-### 3. 🔐 Eco-Friendly Cyber-Security Quiz
-
-Cyber-security knowledge presented through an eco-digital lens. Same Easy / Medium / Hard structure covering topics such as:
-
-- Password hygiene and 2FA
-- Recognising phishing and "green deal" scams
-- Safe device recycling and e-waste
-- Ransomware, encryption, and online privacy
-- Energy-efficient digital habits
-
----
-
-### 4. 🧩 Memory Match *(Unlockable)*
-
-A **4×4 emoji-pair matching game** (8 pairs). Locked by default to encourage progression.
-
-- 🔒 Unlocks once the player's **best score reaches 100 points** (configurable via `UNLOCK_THRESHOLD` in `app.py`)
-- Dashboard shows a 🔒 card with a progress bar until unlocked
-
----
-
-## 🔐 Authentication & Security
-
-- User registration with **email OTP verification** (Gmail SMTP)
-- Secure login flow
-- Full **forgot-password / OTP-reset** flow
-- Local **SQLite** database (`pooki.db`) — no external database required
-
----
-
-## 🛠️ Tech Stack
-
-| Component | Technology |
-|-----------|-----------|
-| Backend | Python 3 / Flask |
-| Frontend | HTML5, CSS3, JavaScript |
-| Database | SQLite (via SQLAlchemy or raw sqlite3) |
-| Email | Gmail SMTP (OTP delivery) |
-| Version Control | Git / GitHub |
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Python 3.8+
-- pip
-
-### Installation
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/wlaa41/ConventryUniversity_503IT_Detectives.git
-cd ConventryUniversity_503IT_Detectives
-
-# 2. Create and activate a virtual environment
-python -m venv venv
-source venv/bin/activate        # macOS/Linux
-venv\Scripts\activate           # Windows
-
-# 3. Install dependencies
-pip install -r requirements.txt
-
-# 4. Configure environment variables
-# Create a .env file with:
-# MAIL_USERNAME=your_gmail@gmail.com
-# MAIL_PASSWORD=your_app_password
-# SECRET_KEY=your_secret_key
-
-# 5. Run the app
-flask run
-```
-
-Open your browser at `http://127.0.0.1:5000`
-
----
-
-## 📁 Repository Structure
+## Project Structure
 
 ```
-ConventryUniversity_503IT_Detectives/
-├── app.py                  # Main Flask application & config
-├── pooki.db                # SQLite database (auto-created)
-├── requirements.txt        # Python dependencies
-├── templates/              # HTML templates (Jinja2)
-│   ├── index.html
-│   ├── dashboard.html
-│   ├── snake_quiz.html
-│   ├── math_quiz.html
-│   ├── cyber_quiz.html
-│   └── memory_match.html
-├── static/                 # CSS, JS, images & assets
-│   ├── css/
-│   ├── js/
-│   └── images/
-└── README.md
+Cyber-detectives/
+│
+├── app.py                  ← Flask routes, SQLite, scoring, OTP email
+├── cyber.db                ← SQLite database (auto-created on first run)
+│
+├── questions/              ← All question banks (separate JSON files)
+│   ├── math_easy.json
+│   ├── math_medium.json
+│   ├── math_hard.json
+│   ├── cyber_easy.json
+│   ├── cyber_medium.json
+│   ├── cyber_hard.json
+│   └── snake.json
+│
+├── static/
+│   ├── style.css           ← All visual styles
+│   ├── game.js             ← Auto-play snake engine
+│   ├── quiz.js             ← Shared quiz engine (math + cyber)
+│   └── logo.svg            ← App logo
+│
+└── templates/
+    ├── base.html           ← Shared layout (leaf background)
+    ├── login.html / register.html / verify.html
+    ├── forgot.html / reset_verify.html / new_password.html
+    ├── dashboard.html      ← Game hub (4 cards, memory locked by default)
+    ├── snake.html          ← Auto-play snake page
+    ├── difficulty.html     ← Easy / Medium / Hard picker (math + cyber)
+    ├── quiz.html           ← Generic quiz page (math + cyber)
+    └── memory.html         ← Memory Match (only reachable when unlocked)
 ```
 
----
+## How to Run
 
-## 👥 Team — The Detectives
+### 1. Install dependencies
+```
+pip install flask werkzeug
+```
 
-| Role | Name | Student ID |
-|------|------|-----------|
-| 📝 **Content Lead** | Saif Ullah | 116115000 |
-| 🔍 **Researcher** | Aaryut Chaudhary | 16069541 |
-| 🎨 **Designer & Coder** | Shree Krishna Shrestha | 15681041 |
-| 📋 **Project Manager** | Mohammad Zayed Alam | 16090763 |
-| 🖼️ **Prototype Designer** | Jina Giri | 16144790 |
-| 🧪 **Tester** | Pushparaj Mahato | 16362947 |
+### 2. Storage
 
-### Role Descriptions
+Cyber-detectives uses SQLite (`cyber.db`) — Python's built-in `sqlite3` module. No external database server, no schema setup, no credentials. The DB file is created automatically on first run.
 
-**📝 Content Lead — Saif Ullah**
-Responsible for writing and structuring all project content, leading report writing and documentation quality, ensuring clarity and academic tone in written work, and supporting presentation script development.
+### 3. (Optional) Email credentials
 
-**🔍 Researcher — Aaryut Chaudhary**
-Conducts cybersecurity research covering threats, risks, and tools; gathers credible sources and references; supports content development with accurate information; and maintains research documentation.
+If you want OTP emails to send, edit `send_otp_email()` in `app.py` with your own Gmail address and app password. If email isn't configured, the OTP is printed to the server console so you can still log in.
 
-**🎨 Designer & Coder — Shree Krishna Shrestha**
-Designs project structure and visual elements, handles GitHub repository setup and formatting, supports technical organisation of files and assets, and improves presentation and report layout design.
+### 4. Start the server
+```
+python app.py
+```
 
-**📋 Project Manager — Mohammad Zayed Alam**
-Oversees project progress and deadlines, coordinates team communication and task distribution, ensures tasks are completed on time, and monitors overall workflow and quality control.
-
-**🖼️ Prototype Designer — Jina Giri**
-Designs diagrams, visuals, and conceptual models; supports presentation design and layout; creates visual explanations of cybersecurity concepts; and assists in UI/UX style representation of ideas.
-
-**🧪 Tester — Pushparaj Mahato**
-Reviews project content for errors and consistency, checks report accuracy and formatting, tests presentation flow and clarity, and ensures final submission quality.
+Visit `http://localhost:5000`
 
 ---
 
-## 🎯 Educational Design Rationale
+## Game Features
 
-**Target Audience:** Students aged 6–15 (adjustable difficulty accommodates the full range)
+### 🐍 Auto-Play Eco Snake Quiz
 
-**Cyber-security concepts covered:**
-- Password hygiene and multi-factor authentication
-- Phishing recognition and scam awareness
-- Online privacy and personal data management
-- Safe device disposal and digital sustainability
-- Ransomware, encryption basics
+The snake is **not controlled by the player** — it slithers around on its own and the player only answers the question on screen.
 
-**Accessibility considerations:**
-- Auto-play snake removes motor-skill barriers
-- Difficulty levels cater to different age groups within the range
-- Emoji-based memory game is intuitive for younger players
-- Clean, eco-friendly visual design avoids sensory overload
+| Feature | Detail |
+|---|---|
+| Mode | Fully auto-play animation — no keyboard controls |
+| Timer | **20 seconds** per question (hard cap) |
+| Correct answer | Snake **grows** by 1 segment, +10 points |
+| Wrong / time-out | Snake **shrinks** by 1 segment |
+| Game over | Snake shrinks below its minimum length |
+| Question pool | `questions/snake.json` (eco-themed maths, shuffled each game) |
 
-**Replayability:**
-- Randomised question pools
-- Score-based unlock mechanic encourages return visits
-- Multiple difficulty tiers provide a progression path
+### 🧮 Math Quiz (Easy / Medium / Hard)
 
----
+Player picks a difficulty, then answers a randomised pool from that tier.
 
-## 📚 Module Context
+- **Easy:** single-digit add/sub, simple multiplication
+- - **Medium:** two-digit arithmetic, multiplication tables, division
+  - - **Hard:** BIDMAS, fractions, percentages, powers, simple algebra
+    - - 20 seconds per question, 10 points per correct answer
+      - - Question banks: `questions/math_easy.json`, `math_medium.json`, `math_hard.json`
+       
+        - ### 🛡️ Eco-Friendly Cyber-Security Quiz (Easy / Medium / Hard)
+       
+        - Cyber-security questions framed around eco-friendly digital habits (saving energy, recycling old devices safely, spotting fake "green deal" scams, etc.)
+       
+        - - **Easy:** phishing basics, password basics, safe device habits
+          - - **Medium:** 2FA, fake eco-deals, HTTPS, e-waste data wiping
+            - - **Hard:** social engineering, supply-chain attacks, ransomware, encryption
+              - - 20 seconds per question, 10 points per correct answer
+                - - Question banks: `questions/cyber_easy.json`, `cyber_medium.json`, `cyber_hard.json`
+                 
+                  - ### 🧩 Memory Match — 🔒 LOCKED by default
+                 
+                  - The memory-match mini-game is locked when a new player logs in.
+                 
+                  - - Unlocks once the player's highest score reaches **100 points** (configurable via `UNLOCK_THRESHOLD` in `app.py`)
+                    - - The dashboard shows a 🔒 card with a progress bar toward the unlock
+                      - - Once unlocked: 4×4 grid of 16 cards (8 emoji pairs), with moves + time tracking
+                       
+                        - ---
 
-- **University:** Coventry University Group
-- **Module:** 503IT — Communication and Collaboration
-- **Assignment:** Collaborative Solution Development and Professional Reflection
-- **Submission Deadline:** 12th June 2026 at 18:00 hrs
-- **Assessment Type:** Composite (Group Presentation + Individual Portfolio)
+                        ## Adding / Editing Questions
 
----
+                        Every question lives in its own JSON file under `questions/`. The format is:
 
-## ⚠️ Disclaimer
+                        ```json
+                        [
+                          {
+                            "q": "What is 7 + 5?",
+                            "answers": ["10", "11", "12", "13"],
+                            "correct": 2
+                          }
+                        ]
+                        ```
 
-This project was developed solely for academic assessment purposes at Coventry University. All game content is age-appropriate and safe for children aged 6–15. No harmful, violent, or adult content is included at any level.
+                        - `answers` must be exactly 4 strings
+                        - - `correct` is the 0-indexed position of the right answer (0 = first)
+                          - - Add as many questions per file as you like — they're shuffled per session
+                           
+                            - ---
 
----
+                            ## Key Constants (in `app.py`)
 
-*Made with 💚 by The Detectives — Coventry University 503IT*
+                            | Constant | Default | Meaning |
+                            |---|---|---|
+                            | `QUESTION_TIME_SEC` | 20 | Seconds allowed per question (hard cap) |
+                            | `POINTS_PER_Q` | 10 | Points awarded per correct answer |
+                            | `UNLOCK_THRESHOLD` | 100 | High score needed to unlock Memory Match |
+
+                            ---
+
+                            ## File Responsibilities
+
+                            | File | Owns |
+                            |---|---|
+                            | `app.py` | Routes, SQLite, question loading, scoring, OTP, unlock logic |
+                            | `questions/*.json` | All question banks (math/cyber easy-medium-hard, snake) |
+                            | `static/style.css` | CSS variables, layout, card/button styles, locked-card + difficulty UI |
+                            | `static/game.js` | Auto-play snake engine, per-question 20s timer, grow/shrink logic |
+                            | `static/quiz.js` | Shared math/cyber quiz engine, timer, score submission |
+                            | `static/logo.svg` | App logo |
+                            | `templates/base.html` | Shared layout, leaf background |
+                            | `templates/dashboard.html` | Game hub (4 cards, memory locked card with progress bar) |
+                            | `templates/snake.html` | Snake canvas + HUD, injects QUESTIONS JSON |
+                            | `templates/difficulty.html` | Easy/Medium/Hard picker (used by both math and cyber) |
+                            | `templates/quiz.html` | Generic quiz page used by math + cyber |
+                            | `templates/memory.html` | Memory board (only reachable when unlocked) |
+                            | Auth templates | login, register, verify, forgot, reset_verify, new_password |
