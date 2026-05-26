@@ -30,3 +30,12 @@ Mohammad Zayed alam
     including creating a secure Flask authentication system and planning eco-themed backgrounds. 
     Contributed to route configuration, user authentication features, password security, 
     and interface design improvements to enhance both functionality and user experience.
+
+
+
+
+
+
+Shree krishna shrestha
+  updating domain and publishing, also assigned supabase as DATABASE system
+  
