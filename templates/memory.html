@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+{% block title %}Memory Match · Cyber{% endblock %}
+
+{% block body %}
+<div class="app-wrap">
+
+  <nav class="sidebar">
+    <div class="sidebar-logo"><img src="{{ url_for('static', filename='logo.svg') }}" width="36" height="36" alt="Cyber" style="vertical-align:middle;margin-right:8px;">CYBER</div>
+    <a href="/dashboard">🏠 Dashboard</a>
+    <a href="/games/snake">🐍 Eco Snake Quiz</a>
+    <a href="/games/math">🧮 Math Quiz</a>
+    <a href="/games/cyber">🛡️ Cyber Quiz</a>
+    <a href="/games/memory" class="active">🧩 Memory Match</a>
+    <a href="/logout" class="logout">⏻ Logout</a>
+  </nav>
+
+  <div class="main-content">
+    <div style="display:flex;flex-direction:column;align-items:center;">
+
+      <h2 class="page-heading" style="text-align:center;">🧩 MEMORY MATCH</h2>
+      <p class="page-sub">Flip and match all 8 pairs to win!</p>
+
+      <div class="mem-hud">
+        <span>Moves <strong id="mem-moves">0</strong></span>
+        <span>Pairs <strong id="mem-pairs">0</strong>/8</span>
+        <span>Time <strong id="mem-timer" style="color:var(--yellow);">0s</strong></span>
+        <span>Score <strong id="mem-score" style="color:var(--lime);">0</strong></span>
+      </div>
+
+      <div id="memory-board"></div>
+
+      <button class="mem-new-btn" onclick="initMemory()">🔄 NEW GAME</button>
+
+      <!-- Win overlay -->
+      <div class="mem-win-overlay hidden" id="mem-win">
+        <div class="mem-win-card">
+          <div style="font-size:3rem;margin-bottom:10px;">🎉</div>
+          <h2 style="font-family:var(--font-head);color:var(--lime);font-size:1.8rem;margin-bottom:6px;">YOU WIN!</h2>
+          <p id="mem-win-stats" style="color:var(--text);font-size:1rem;margin-bottom:6px;"></p>
+          <p id="mem-win-score" style="color:var(--yellow);font-family:var(--font-head);font-size:1.4rem;margin-bottom:16px;"></p>
+          <p id="mem-win-server" style="color:var(--muted);font-size:0.85rem;margin-bottom:16px;min-height:1.2em;"></p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+            <button class="overlay-btn" onclick="initMemory()">PLAY AGAIN →</button>
+            <a href="/dashboard" class="overlay-btn" style="background:var(--yellow);">DASHBOARD</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+/* ══════════════════════════════════════════════════════════════
+   Memory Match — fixed version
+   Bugs fixed:
+     • locked flag kept true during match animation (no more rapid-click glitch)
+     • Win screen is an in-page overlay (no alert)
+     • Score calculated & submitted to server
+     • Sounds on match / no-match
+══════════════════════════════════════════════════════════════ */
+
+const EMOJIS = ['🌿','⚡','🔥','💧','🌍','🌻','🦋','🐸'];
+
+/* Game state — all in one object so initMemory() resets it cleanly */
+let MEM = {};
+
+function initMemory() {
+  /* Clear any running timer */
+  if (MEM.timerInterval) clearInterval(MEM.timerInterval);
+
+  MEM = {
+    cards:         [],
+    flipped:       [],   /* at most 2 open cards at a time */
+    matched:       0,
+    moves:         0,
+    startTime:     null,
+    elapsedSecs:   0,
+    timerInterval: null,
+    locked:        false,  /* true while animating — blocks new flips */
+  };
+
+  document.getElementById('mem-moves').textContent  = 0;
+  document.getElementById('mem-pairs').textContent  = 0;
+  document.getElementById('mem-timer').textContent  = '0s';
+  document.getElementById('mem-score').textContent  = 0;
+  document.getElementById('mem-win').classList.add('hidden');
+
+  const board = document.getElementById('memory-board');
+  board.innerHTML = '';
+
+  /* Shuffle two copies of the emoji deck */
+  const deck = [...EMOJIS, ...EMOJIS].sort(() => Math.random() - 0.5);
+
+  deck.forEach(em => {
+    const card = document.createElement('div');
+    card.className   = 'mem-card';
+    card.dataset.em  = em;
+    card.dataset.open = 'false';
+    card.dataset.matched = 'false';
+    card.textContent = '';
+    card.addEventListener('click', () => onCardClick(card));
+    board.appendChild(card);
+    MEM.cards.push(card);
+  });
+}
+
+/* ── Timer ────────────────────────────────────────────────────── */
+function startTimer() {
+  MEM.startTime = Date.now();
+  MEM.timerInterval = setInterval(() => {
+    MEM.elapsedSecs = Math.floor((Date.now() - MEM.startTime) / 1000);
+    document.getElementById('mem-timer').textContent = MEM.elapsedSecs + 's';
+    document.getElementById('mem-score').textContent = calcScore();
+  }, 1000);
+}
+
+/* ── Score formula ────────────────────────────────────────────── */
+function calcScore() {
+  /* Base: each matched pair = 15 pts. Extra-move penalty: -2 per move over 8. */
+  const base       = MEM.matched * 15;
+  const extraMoves = Math.max(0, MEM.moves - 8);
+  const penalty    = extraMoves * 2;
+  return Math.max(0, base - penalty);
+}
+
+/* ── Card click ───────────────────────────────────────────────── */
+function onCardClick(card) {
+  /* Ignore if: board locked, card already open/matched, or 2 already flipped */
+  if (MEM.locked) return;
+  if (card.dataset.open === 'true') return;
+  if (card.dataset.matched === 'true') return;
+  if (MEM.flipped.length >= 2) return;
+
+  /* Start timer on first flip */
+  if (!MEM.startTime) startTimer();
+
+  /* Flip open */
+  card.dataset.open = 'true';
+  card.textContent  = card.dataset.em;
+  card.classList.add('flipped');
+  MEM.flipped.push(card);
+
+  if (MEM.flipped.length === 2) {
+    MEM.moves++;
+    document.getElementById('mem-moves').textContent = MEM.moves;
+    MEM.locked = true;   /* lock the board while we evaluate */
+    checkMatch();
+  }
+}
+
+/* ── Match check ─────────────────────────────────────────────── */
+function checkMatch() {
+  const [a, b] = MEM.flipped;
+  const isMatch = (a.dataset.em === b.dataset.em);
+
+  if (isMatch) {
+    /* Mark matched — keep locked briefly so animation completes */
+    a.classList.replace('flipped', 'matched');
+    b.classList.replace('flipped', 'matched');
+    a.dataset.matched = 'true';
+    b.dataset.matched = 'true';
+
+    MEM.matched++;
+    MEM.flipped = [];
+    document.getElementById('mem-pairs').textContent = MEM.matched;
+    if (window.playCorrectSound) window.playCorrectSound();
+
+    if (MEM.matched === 8) {
+      /* All pairs found — stop timer, show win */
+      clearInterval(MEM.timerInterval);
+      MEM.locked = false;
+      setTimeout(showWin, 400);
+    } else {
+      /* Brief lock so the match glow animates, then unlock */
+      setTimeout(() => { MEM.locked = false; }, 400);
+    }
+
+  } else {
+    /* No match — flip back after 900 ms */
+    if (window.playWrongSound) window.playWrongSound();
+    setTimeout(() => {
+      a.dataset.open = 'false';
+      b.dataset.open = 'false';
+      a.textContent  = '';
+      b.textContent  = '';
+      a.classList.remove('flipped');
+      b.classList.remove('flipped');
+      MEM.flipped = [];
+      MEM.locked  = false;   /* unlock only after flip-back completes */
+    }, 900);
+  }
+}
+
+/* ── Win screen ──────────────────────────────────────────────── */
+function showWin() {
+  const finalScore = calcScore();
+  const secs       = MEM.elapsedSecs;
+
+  document.getElementById('mem-win-stats').textContent =
+    `Moves: ${MEM.moves}   |   Time: ${secs}s`;
+  document.getElementById('mem-win-score').textContent =
+    `Score: ${finalScore} pts`;
+  document.getElementById('mem-win').classList.remove('hidden');
+
+  /* Submit to server */
+  fetch('/api/submit_score', {
+    method:      'POST',
+    credentials: 'same-origin',
+    keepalive:   true,
+    headers:     { 'Content-Type': 'application/json' },
+    body:        JSON.stringify({ score: finalScore, source: 'memory', difficulty: '' }),
+  })
+  .then(r => r.json())
+  .then(data => {
+    const el = document.getElementById('mem-win-server');
+    if (data && data.ok) {
+      el.textContent = `🏆 Best score: ${data.high_score} pts`;
+      if (data.memory_unlocked) {
+        el.textContent += ' — 🧩 Memory Match unlocked!';
+        el.style.color = 'var(--lime)';
+      }
+    }
+  })
+  .catch(() => {});
+}
+
+/* Boot */
+initMemory();
+</script>
+{% endblock %}
