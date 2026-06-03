@@ -1,6 +1,6 @@
-# 🌿 pooki — Eco Learning Quiz Hub
+# 🌿 Cyber — Eco Learning Quiz Hub
 
-A Flask web app featuring **pooki**: an eco-themed learning hub for ages 6–12 with an auto-playing snake quiz, a math quiz, an eco-friendly cyber-security quiz, and an unlockable memory-match mini-game.
+A Flask web app featuring **Cyber**: an eco-themed learning hub for ages 6–12 with an auto-playing snake quiz, a math quiz, an eco-friendly cyber-security quiz, and an unlockable memory-match mini-game.
 
 Deployable locally **or** on [Vercel](https://vercel.com) via `vercel.json`.
 
