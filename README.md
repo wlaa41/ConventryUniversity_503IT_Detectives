@@ -1,415 +1,291 @@
+# 🌿 buzzXzone — Eco Learning Hub
 
+A full-stack Flask web app deployed on **Vercel** with a **Supabase PostgreSQL** backend.  
+An eco-themed learning hub featuring quiz games, a memory-match mini-game, animated visuals, and a capybara mascot.
 
-from flask import Flask, render_template, redirect, request, session, jsonify
-import sqlite3
-from werkzeug.security import generate_password_hash, check_password_hash
-import random
-import os
-import json
-import smtplib
-from datetime import datetime, timedelta
-from email.mime.text import MIMEText
+Live: **[buzzxzone.vercel.app](https://buzzxzone.vercel.app)**
 
-# ─────────────────────────────────────────────
-# CONFIG
-# ─────────────────────────────────────────────
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# Vercel's filesystem is read-only except /tmp; data won't persist between cold starts
-DB_PATH = "/tmp/cyber.db" if os.environ.get("VERCEL") else os.path.join(BASE_DIR, "cyber.db")
-QUESTIONS_DIR     = os.path.join(BASE_DIR, "questions")
-QUESTION_TIME_SEC = 20            # 20 seconds per question (hard cap)
-POINTS_PER_Q      = 10            # 10 points per correct answer
-UNLOCK_THRESHOLD  = 100           # Best score needed to unlock memory match
+---
 
-app = Flask(__name__)
-app.secret_key = os.environ.get("FLASK_SECRET_KEY", "supersecretkey-change-in-production")
+## Features
 
+| Feature | Description |
+|---|---|
+| 🐍 **Eco Snake Quiz** | Auto-playing snake — answer correctly to grow it, wrong to shrink it |
+| 🧮 **Math Quiz** | Easy / Medium / Hard difficulty tiers |
+| 🛡️ **Eco Cyber Quiz** | Eco-friendly cyber-security questions across three difficulty tiers |
+| 🧩 **Memory Match** | Locked by default — unlocks at 100 points |
+| ✨ **Neon Mouse Trail** | Glowing animated cursor trail on every page |
+| 🐾 **Capybara Mascot** | Animated Capy on the dashboard — click to get messages |
+| 🌿 **Forest Theme** | Dark-green vibrant UI with animated cards and floating nature symbols |
+| 🔐 **OTP Auth** | Email-verified login via Gmail SMTP |
 
-# ─────────────────────────────────────────────
-# DATABASE (SQLite — auto-created on first run)
-# ─────────────────────────────────────────────
-def get_db():
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    return conn
+---
 
+## Tech Stack
 
-def init_db():
-    """Create the users table and migrate old schemas in-place."""
-    conn = get_db()
-    cur  = conn.cursor()
-    cur.execute("""
-        CREATE TABLE IF NOT EXISTS users (
-            id              INTEGER PRIMARY KEY AUTOINCREMENT,
-            username        TEXT NOT NULL,
-            email           TEXT NOT NULL UNIQUE,
-            password        TEXT NOT NULL,
-            high_score      INTEGER NOT NULL DEFAULT 0,
-            memory_unlocked INTEGER NOT NULL DEFAULT 0
-        )
-    """)
-    # Migration: if an older users table exists without these columns, add them.
-    existing_cols = {row[1] for row in cur.execute("PRAGMA table_info(users)").fetchall()}
-    if "high_score" not in existing_cols:
-        cur.execute("ALTER TABLE users ADD COLUMN high_score INTEGER NOT NULL DEFAULT 0")
-        print("[cyber] Migrated: added users.high_score column")
-    if "memory_unlocked" not in existing_cols:
-        cur.execute("ALTER TABLE users ADD COLUMN memory_unlocked INTEGER NOT NULL DEFAULT 0")
-        print("[cyber] Migrated: added users.memory_unlocked column")
-    conn.commit()
-    conn.close()
+| Layer | Technology |
+|---|---|
+| Backend | Python 3 · Flask |
+| Database | PostgreSQL (Supabase) via `psycopg2` |
+| Frontend | HTML5 · CSS3 · Vanilla JavaScript · Canvas 2D |
+| Auth | Session-based + 6-digit OTP via Gmail SMTP |
+| Deployment | Vercel (serverless) |
 
+---
 
-init_db()
+## Project Structure
 
+```
+buzzxzone/
+│
+├── app.py                        ← Flask routes, DB, scoring, OTP email, health check
+├── vercel.json                   ← Vercel deployment config
+├── requirements.txt              ← Python dependencies
+│
+├── questions/                    ← Question banks (JSON)
+│   ├── snake.json
+│   ├── math_easy.json
+│   ├── math_medium.json
+│   ├── math_hard.json
+│   ├── cyber_easy.json
+│   ├── cyber_medium.json
+│   └── cyber_hard.json
+│
+├── static/
+│   ├── style.css                 ← Global styles, forest theme, capybara, animations
+│   ├── logo.svg                  ← App logo
+│   ├── game.js                   ← Auto-play snake engine
+│   └── quiz.js                   ← Shared quiz engine (math + cyber)
+│
+└── templates/
+    ├── base.html                 ← Shared layout: neon trail, spark effects, audio
+    ├── dashboard.html            ← Game hub with capybara mascot + animated cards
+    ├── snake.html                ← Eco Snake Quiz page
+    ├── difficulty.html           ← Difficulty picker (math + cyber)
+    ├── quiz.html                 ← Generic quiz page
+    ├── memory.html               ← Memory Match (unlockable)
+    ├── login.html                ← Login with OTP
+    ├── register.html
+    ├── verify.html               ← OTP verification
+    ├── forgot.html
+    ├── reset_verify.html
+    └── new_password.html
+```
 
-# ─────────────────────────────────────────────
-# EMAIL (OTP via Gmail)
-# Replace with your own Gmail address + app password.
-# ─────────────────────────────────────────────
-def send_otp_email(to_email, otp):
-    sender_email    = os.environ.get("GMAIL_USER", "")
-    sender_password = os.environ.get("GMAIL_PASSWORD", "")
-    msg = MIMEText(f"Your Cyber OTP is: {otp}")
-    msg["Subject"] = "Cyber Verification Code"
-    msg["From"]    = sender_email
-    msg["To"]      = to_email
-    try:
-        server = smtplib.SMTP("smtp.gmail.com", 587)
-        server.starttls()
-        server.login(sender_email, sender_password)
-        server.send_message(msg)
-        server.quit()
-    except Exception as e:
-        # Don't crash the app if email isn't configured.
-        print("[cyber] Email error:", e)
-        print(f"[cyber] (DEV) OTP for {to_email} is: {otp}")
+---
 
+## Local Development
 
-# ─────────────────────────────────────────────
-# QUESTIONS LOADER
-# ─────────────────────────────────────────────
-def load_questions(name):
-    """Load a question bank JSON file from /questions and shuffle it."""
-    path = os.path.join(QUESTIONS_DIR, f"{name}.json")
-    with open(path, "r", encoding="utf-8") as f:
-        pool = json.load(f)
-    random.shuffle(pool)
-    return pool
+### 1. Clone the repo
 
+```bash
+git clone https://github.com/krishnaxtha14/buzzxzone.git
+cd buzzxzone
+```
 
-# ─────────────────────────────────────────────
-# SCORE / UNLOCK HELPERS
-# ─────────────────────────────────────────────
-def update_high_score(user_id, new_score):
-    """Save the user's high score and unlock memory match if threshold reached."""
-    conn = get_db()
-    cur  = conn.cursor()
-    row  = cur.execute(
-        "SELECT high_score, memory_unlocked FROM users WHERE id=?", (user_id,)
-    ).fetchone()
-    if row is None:
-        conn.close()
-        return 0, False
+### 2. Install dependencies
 
-    best     = max(row["high_score"], int(new_score))
-    unlocked = 1 if (best >= UNLOCK_THRESHOLD or row["memory_unlocked"]) else 0
+```bash
+pip install -r requirements.txt
+```
 
-    cur.execute(
-        "UPDATE users SET high_score=?, memory_unlocked=? WHERE id=?",
-        (best, unlocked, user_id),
-    )
-    conn.commit()
-    conn.close()
-    return best, bool(unlocked)
+`requirements.txt` contains:
+```
+flask>=3.0.0
+werkzeug>=3.0.0
+psycopg2-binary>=2.9.0
+python-dotenv>=1.0.0
+```
 
+### 3. Set environment variables
 
-def get_user_progress(user_id):
-    """Returns dict with high_score, memory_unlocked, threshold, progress_pct."""
-    conn = get_db()
-    row  = conn.execute(
-        "SELECT high_score, memory_unlocked FROM users WHERE id=?", (user_id,)
-    ).fetchone()
-    conn.close()
-    if row is None:
-        return {"high_score": 0, "memory_unlocked": False,
-                "threshold": UNLOCK_THRESHOLD, "progress_pct": 0}
+Create a `.env` file in the project root:
 
-    pct = min(100, int(row["high_score"] * 100 / UNLOCK_THRESHOLD)) if UNLOCK_THRESHOLD else 100
-    return {
-        "high_score":      row["high_score"],
-        "memory_unlocked": bool(row["memory_unlocked"]),
-        "threshold":       UNLOCK_THRESHOLD,
-        "progress_pct":    pct,
-    }
+```env
+# Supabase PostgreSQL connection string
+DATABASE_URL=postgresql://postgres.[ref]:[password]@aws-0-[region].pooler.supabase.com:6543/postgres
 
+# Flask session secret (any random string)
+FLASK_SECRET_KEY=your-secret-key-here
 
-# ─────────────────────────────────────────────
-# AUTH ROUTES
-# ─────────────────────────────────────────────
-@app.route("/")
-def home():
-    return redirect("/login")
+# Gmail SMTP for OTP emails (optional for local dev)
+GMAIL_USER=your-email@gmail.com
+GMAIL_PASSWORD=your-app-password
+```
 
+> **Note:** OTP emails are optional locally. If Gmail isn't configured, the OTP is printed to the server console instead.
 
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    error = ""
-    if request.method == "POST":
-        conn = get_db()
-        try:
-            conn.execute(
-                "INSERT INTO users(username, email, password) VALUES(?,?,?)",
-                (request.form["username"],
-                 request.form["email"],
-                 generate_password_hash(request.form["password"])),
-            )
-            conn.commit()
-        except sqlite3.IntegrityError:
-            error = "Email already exists!"
-        conn.close()
-        if not error:
-            return redirect("/login")
-    return render_template("register.html", error=error)
+### 4. Run locally
 
+```bash
+python app.py
+```
 
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    error = ""
-    if request.method == "POST":
-        conn = get_db()
-        user = conn.execute(
-            "SELECT * FROM users WHERE email=?", (request.form["email"],)
-        ).fetchone()
-        conn.close()
-        if not user or not check_password_hash(user["password"], request.form["password"]):
-            error = "Invalid credentials!"
-        else:
-            otp = str(random.randint(100000, 999999))
-            session["otp"]        = otp
-            session["otp_expiry"] = (datetime.now() + timedelta(minutes=5)).isoformat()
-            session["temp_user"]  = {"id": user["id"], "username": user["username"]}
-            send_otp_email(user["email"], otp)
-            return redirect("/verify")
-    return render_template("login.html", error=error)
+Visit `http://localhost:5000`
 
+---
 
-@app.route("/verify", methods=["GET", "POST"])
-def verify():
-    if "otp" not in session:
-        return redirect("/login")
-    error = ""
-    if request.method == "POST":
-        if request.form["otp"] != session["otp"]:
-            error = "Invalid OTP!"
-        elif datetime.now() > datetime.fromisoformat(session["otp_expiry"]):
-            error = "OTP expired!"
-        else:
-            user = session["temp_user"]
-            session.clear()
-            session["user_id"]  = user["id"]
-            session["username"] = user["username"]
-            return redirect("/dashboard")
-    return render_template("verify.html", error=error)
+## Vercel Deployment
 
+This project is configured for Vercel serverless deployment via `vercel.json`.
 
-@app.route("/forgot", methods=["GET", "POST"])
-def forgot():
-    error = ""
-    if request.method == "POST":
-        conn = get_db()
-        user = conn.execute(
-            "SELECT * FROM users WHERE email=?", (request.form["email"],)
-        ).fetchone()
-        conn.close()
-        if not user:
-            error = "Email not found!"
-        else:
-            otp = str(random.randint(100000, 999999))
-            session["reset_otp"]    = otp
-            session["reset_expiry"] = (datetime.now() + timedelta(minutes=5)).isoformat()
-            session["reset_user"]   = user["id"]
-            send_otp_email(request.form["email"], otp)
-            return redirect("/reset_verify")
-    return render_template("forgot.html", error=error)
+### Environment Variables (set in Vercel dashboard)
 
+| Variable | Required | Description |
+|---|---|---|
+| `DATABASE_URL` | ✅ Yes | Full Supabase connection string (pooler, port 6543) |
+| `FLASK_SECRET_KEY` | ✅ Yes | Session signing key |
+| `GMAIL_USER` | Optional | Gmail address for OTP sending |
+| `GMAIL_PASSWORD` | Optional | Gmail app password |
 
-@app.route("/reset_verify", methods=["GET", "POST"])
-def reset_verify():
-    if "reset_otp" not in session:
-        return redirect("/forgot")
-    error = ""
-    if request.method == "POST":
-        if request.form["otp"] != session["reset_otp"]:
-            error = "Invalid OTP!"
-        else:
-            return redirect("/new_password")
-    return render_template("reset_verify.html", error=error)
+### Check if the database is connected
 
+After deployment, visit:
 
-@app.route("/new_password", methods=["GET", "POST"])
-def new_password():
-    if "reset_user" not in session:
-        return redirect("/forgot")
-    error = ""
-    if request.method == "POST":
-        if request.form["password"] != request.form["confirm"]:
-            error = "Passwords do not match!"
-        else:
-            conn = get_db()
-            conn.execute(
-                "UPDATE users SET password=? WHERE id=?",
-                (generate_password_hash(request.form["password"]), session["reset_user"]),
-            )
-            conn.commit()
-            conn.close()
-            session.clear()
-            return redirect("/login")
-    return render_template("new_password.html", error=error)
+```
+https://buzzxzone.vercel.app/health
+```
 
+Expected response when healthy:
+```json
+{"status": "ok", "database": "connected"}
+```
 
-@app.route("/logout")
-def logout():
-    session.clear()
-    return redirect("/login")
+If it returns an error, check that `DATABASE_URL` is set correctly in the Vercel dashboard and uses `sslmode=require`.
 
+### Supabase Setup
 
-# ─────────────────────────────────────────────
-# DASHBOARD
-# ─────────────────────────────────────────────
-@app.route("/dashboard")
-def dashboard():
-    if "user_id" not in session:
-        return redirect("/login")
-    progress = get_user_progress(session["user_id"])
-    return render_template(
-        "dashboard.html",
-        username=session.get("username", "PLAYER"),
-        progress=progress,
-    )
+1. Create a project at [supabase.com](https://supabase.com)
+2. Go to **Project Settings → Database → Connection Pooling**
+3. Copy the **Transaction pooler** connection string (port 6543)
+4. Set it as `DATABASE_URL` in Vercel
 
+The `users` table is created automatically on first startup:
 
-# ─────────────────────────────────────────────
-# GAME ROUTES
-# ─────────────────────────────────────────────
-@app.route("/games/snake")
-def snake():
-    if "user_id" not in session:
-        return redirect("/login")
-    questions = load_questions("snake")
-    return render_template(
-        "snake.html",
-        questions_json=json.dumps(questions),
-        username=session.get("username", "PLAYER"),
-        question_time=QUESTION_TIME_SEC,
-        points_per_q=POINTS_PER_Q,
-    )
+```sql
+CREATE TABLE IF NOT EXISTS users (
+    id              SERIAL PRIMARY KEY,
+    username        TEXT NOT NULL,
+    email           TEXT NOT NULL UNIQUE,
+    password        TEXT NOT NULL,
+    high_score      INTEGER NOT NULL DEFAULT 0,
+    memory_unlocked INTEGER NOT NULL DEFAULT 0
+);
+```
 
+---
 
-@app.route("/games/math")
-def math_picker():
-    if "user_id" not in session:
-        return redirect("/login")
-    return render_template("difficulty.html",
-                           category="math",
-                           title="MATH QUIZ",
-                           icon="🧮",
-                           username=session.get("username", "PLAYER"))
+## Games
 
+### 🐍 Eco Snake Quiz
 
-@app.route("/games/cyber")
-def cyber_picker():
-    if "user_id" not in session:
-        return redirect("/login")
-    return render_template("difficulty.html",
-                           category="cyber",
-                           title="ECO CYBER-SECURITY QUIZ",
-                           icon="🛡️",
-                           username=session.get("username", "PLAYER"))
+The snake plays **automatically** — no player controls. Answer questions to influence it.
 
+| Event | Result |
+|---|---|
+| Correct answer | Snake grows (+1 segment) · **+10 points** |
+| Wrong / timeout | Snake shrinks (−1 segment) |
+| Snake too short | Game over |
+| Timer per question | **20 seconds** |
 
-@app.route("/games/<category>/<difficulty>")
-def play_quiz(category, difficulty):
-    if "user_id" not in session:
-        return redirect("/login")
-    if category not in ("math", "cyber"):
-        return redirect("/dashboard")
-    if difficulty not in ("easy", "medium", "hard"):
-        return redirect(f"/games/{category}")
+### 🧮 Math Quiz
 
-    bank_name = f"{category}_{difficulty}"
-    try:
-        questions = load_questions(bank_name)
-    except FileNotFoundError:
-        return redirect(f"/games/{category}")
+Three difficulty tiers, 10 pts per correct answer, 20-second timer per question.
 
-    title_map = {
-        "math":  "MATH QUIZ",
-        "cyber": "ECO CYBER-SECURITY QUIZ",
-    }
-    return render_template(
-        "quiz.html",
-        questions_json=json.dumps(questions),
-        category=category,
-        difficulty=difficulty,
-        title=title_map[category],
-        username=session.get("username", "PLAYER"),
-        question_time=QUESTION_TIME_SEC,
-        points_per_q=POINTS_PER_Q,
-    )
+- **Easy** — single-digit arithmetic, simple multiplication
+- **Medium** — two-digit arithmetic, tables, division
+- **Hard** — BIDMAS, fractions, percentages, algebra
 
+### 🛡️ Eco Cyber-Security Quiz
 
-@app.route("/games/memory")
-def memory():
-    if "user_id" not in session:
-        return redirect("/login")
-    progress = get_user_progress(session["user_id"])
-    if not progress["memory_unlocked"]:
-        # Send them back with a flash-style message in session
-        session["locked_msg"] = (
-            f"🔒 Memory Match is locked. Reach {progress['threshold']} points "
-            f"to unlock it! (Best so far: {progress['high_score']})"
-        )
-        return redirect("/dashboard")
-    return render_template("memory.html",
-                           username=session.get("username", "PLAYER"))
+Cyber-security questions framed around eco-digital habits.
 
+- **Easy** — phishing basics, password safety, device hygiene
+- **Medium** — 2FA, fake eco-deals, HTTPS, e-waste
+- **Hard** — social engineering, ransomware, encryption, supply-chain attacks
 
-# ─────────────────────────────────────────────
-# SCORE SUBMISSION (called by snake/quiz JS at end of game)
-# ─────────────────────────────────────────────
-@app.route("/api/submit_score", methods=["POST"])
-def submit_score():
-    if "user_id" not in session:
-        print("[cyber] submit_score: not_logged_in")
-        return jsonify({"ok": False, "error": "not_logged_in"}), 401
-    try:
-        data       = request.get_json(silent=True) or {}
-        score      = int(data.get("score", 0))
-        source     = data.get("source", "unknown")
-        difficulty = data.get("difficulty", "")
-        best, unlocked = update_high_score(session["user_id"], score)
-        print(f"[cyber] submit_score user={session['user_id']} "
-              f"src={source}/{difficulty} score={score} -> best={best} unlocked={unlocked}")
-        return jsonify({
-            "ok":              True,
-            "submitted":       score,
-            "high_score":      best,
-            "memory_unlocked": unlocked,
-            "threshold":       UNLOCK_THRESHOLD,
-        })
-    except Exception as e:
-        print("[cyber] submit_score ERROR:", e)
-        return jsonify({"ok": False, "error": str(e)}), 500
+### 🧩 Memory Match
 
+- Locked until the player's **highest score reaches 100 points**
+- 4×4 grid of 16 cards (8 emoji pairs)
+- Shows a progress bar on the locked card
+- Configurable via `UNLOCK_THRESHOLD` in `app.py`
 
-@app.route("/api/progress")
-def api_progress():
-    if "user_id" not in session:
-        return jsonify({"ok": False}), 401
-    return jsonify({"ok": True, **get_user_progress(session["user_id"])})
+---
 
+## Question Format
 
-# ─────────────────────────────────────────────
-if __name__ == "__main__":
-    app.run(debug=True)
+All questions live in `questions/*.json`:
+
+```json
+[
+  {
+    "q": "What does HTTPS stand for?",
+    "answers": ["HyperText Transfer Protocol Secure", "High Tech Phishing System", "Hyper Transfer Protocol Standard", "HyperText Testing Protocol Suite"],
+    "correct": 0
+  }
+]
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `q` | string | The question text |
+| `answers` | array[4] | Exactly 4 answer choices |
+| `correct` | integer | 0-indexed position of the correct answer |
+
+Questions are shuffled on every new session.
+
+---
+
+## Key Constants (`app.py`)
+
+| Constant | Default | Description |
+|---|---|---|
+| `QUESTION_TIME_SEC` | `20` | Seconds allowed per question |
+| `POINTS_PER_Q` | `10` | Points per correct answer |
+| `UNLOCK_THRESHOLD` | `100` | Score needed to unlock Memory Match |
+
+---
+
+## Visual Features
+
+### Neon Mouse Trail
+Every page has an animated neon glow trail that follows the cursor:
+- Glowing particles cycle through greens, cyans, and golds
+- Connected line with shadow blur and colour-coded inner/outer rings
+- Pulsing cursor dot with custom ring
+
+### Spark Click Effect
+Clicking or tapping anywhere spawns an explosion of neon sparks.
+
+### Capybara Mascot
+The dashboard features **Capy**, an animated 2D canvas capybara:
+- Walking, sitting, eating, and waving animations
+- Ear twitches, eye blinks, tail wag
+- Click to cycle through 10 messages
+- Message auto-cycles every 5 seconds
+
+### Animated Cards
+Dashboard game cards have:
+- Staggered entrance animations
+- Bouncing icon on idle
+- Glowing top-bar reveal on hover
+
+---
+
+## Authentication Flow
+
+```
+Register → Login (email + password) → OTP email sent → Verify OTP → Dashboard
+                                                            ↑
+                                              (printed to console if email not set)
+```
+
+Password reset follows the same OTP flow via `Forgot Password`.
+
+---
+
+## License
+
+MIT — free to use, modify, and deploy.
