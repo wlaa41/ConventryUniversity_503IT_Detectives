@@ -33,12 +33,13 @@ In our meeting, my contribution was doing Research on gaming scams, other emails
 Creating age-appropriate phishing scenarios with educational explanations.
 Sharing final phishing quiz content with the team for implementation.
 
-
- I am Pushparaj working as a tester and reviewer for the project. I tested the OTP email delivery system,
- reviewed the quiz difficulty levels to ensure they were suitable for different age groups,
-  and checked the score tracking system to make sure points and unlock progress worked 
-  correctly. I also shared feedback with the team to help improve the overall user
-   experience and game quality.
+Pushparaj Mahato
+ I worked as a Tester and Reviewer for the project. My responsibilities included
+  testing the OTP email verification system, reviewing the quiz difficulty levels 
+  to ensure they were suitable for different age groups, testing the score tracking
+   and Memory Match unlock features, reviewing animations and gameplay performance,
+    and providing feedback to improve the overall user experience, accessibility, and 
+    quality of the game.
 
 Mohammad Zayed alam
    Worked on backend development and UI design tasks for the project,
