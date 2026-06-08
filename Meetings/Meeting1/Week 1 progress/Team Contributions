@@ -1,0 +1,17 @@
+Aaryut Chaudhary
+Contributed to early discussions about game ideas and helped in understanding the initial project structure. Participated in brainstorming sessions for different mini-games and supported the team in identifying basic features for the Cyber Educational Game project.
+
+Shree Krishna Shrestha
+Helped review the initial project files and explained the basic structure of the Flask application. Contributed ideas about how the authentication system (login, registration, OTP verification) should work and supported early technical discussions.
+
+Mohammad Zayed Alam
+Assisted in reviewing the existing project setup and contributed to understanding the backend structure. Participated in discussions about database usage (SQLite) and helped identify missing files required for proper project execution.
+
+Jina 
+Contributed creative ideas for UI/UX design during early planning. Shared suggestions for dashboard layout, background themes, and researched on visual designs to have to interactive ideas. Also participated in initial Trello setup discussions and prepared her cards.
+
+Saif 
+Explained the teamwork concept and project work and ensured all team members had a clear understanding of the project overview. Helped organise ideas for the game structure and explained the overall direction of the platform. Also supported role assignment within the team and guided initial planning activities.
+
+Pushparaj Mahato
+Explained the overall structure of the project after reviewing the initial files (app.py, pooki.db, README.md). Identified missing components such as JSON question files, static assets, and HTML templates. Highlighted a security issue related to hard-coded credentials in the system. Also contributed to learning GitHub workflow including commit, push, and pull operations, helping the team understand version control basics.
