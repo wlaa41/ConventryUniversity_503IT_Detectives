@@ -1,6 +1,17 @@
-Aaryut created cyber-security and maths quiz questions.
-Shree Krishna began setting up Flask application structure.
-Mohammad updated Trello workflow and monitored progress.
-Jina worked on eco-themed UI and background concepts.
-Saif improved wording and educational structure of questions.
-Pushparaj reviewed usability and gameplay flow.
+Pushparaj Mahato
+Worked as a Tester and Reviewer for the project. Responsibilities included testing the OTP email verification system, reviewing quiz difficulty levels to ensure suitability for different age groups, testing score tracking and Memory Match unlock features, reviewing animations and gameplay performance, and providing feedback to improve user experience, accessibility, and overall game quality.
+
+Mohammad Zayed Alam
+Worked on backend development and UI design tasks, including creating a secure Flask authentication system and planning eco-themed backgrounds. Contributed to route configuration, password security, user authentication features, and interface design improvements to enhance functionality and user experience.
+
+Shree Krishna Shrestha
+Worked on system deployment tasks, including updating domain settings and publishing the project. Also implemented Supabase as the database system to improve backend data storage and management.
+
+Jina 
+Focused on UI/UX design improvements, including dashboard layout ideas, background themes, and interface structure. Also contributed to Trello updates and participated in presentation preparation and delivery.
+
+Saif 
+Ensured smooth project workflow by monitoring Trello progress and making sure no tasks were left incomplete. Helped maintain overall project direction, explained the game overview to the team, and supported organisation of content and planning. Also contributed to final discussions regarding the project name, helping change it from “Pookie” to “BuzzXZone”.
+
+Aaryut Chaudhary 
+Contributed to quiz development by structuring both Cyber Security and Math quizzes in a clear multiple-choice format. Created and refined questions focused on beginner-friendly learning. Researched real-world cyber security threats such as phishing emails and QR-code scams and converted them into educational scenarios. Actively managed Trello workflow by assigning tasks, updating progress stages, and improving team coordination. Also participated in Agile discussions and helped the team understand Agile vs Waterfall methodologies during class sessions.

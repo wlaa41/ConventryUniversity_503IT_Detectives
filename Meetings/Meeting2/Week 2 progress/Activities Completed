@@ -1,6 +1,17 @@
-Created and organised the Trello board for workflow management.
-Planned game structure and mini-game ideas.
-Discussed accessibility features and replayability concepts.
-Began development planning for the Flask application.
-Started preparing quiz questions for Cyber Security Quiz and Math Quiz.
-Discussed adding score tracking, animations, and sound effects.
+Reviewed current progress of the cyber educational game project.
+
+During Week 2, our team focused on developing and improving the quiz game components and strengthening the overall structure of the project. We worked on refining the Cyber Security Quiz and Math Quiz sections, ensuring they were properly structured in a multiple-choice format for better user interaction and learning experience.
+
+During the meeting, Aaryut contributed to the development of the quiz system by helping structure both the Cyber Security Quiz and Math Quiz.Created and organised a set of questions for both quizzes, making sure they were simple, clear, and suitable for beginners.
+
+For the Cyber Security Quiz, included topics such as phishing, malware, passwords, firewalls, and two-factor authentication. For the Math Quiz, included basic arithmetic, percentages, and number patterns. I also organised all questions into a Trello-style task structure with checklists, which helped the team track progress from planning to development, testing, and review stages.
+
+Additionally, we improved the research aspect of the Cyber Security Quiz by exploring real-world examples of phishing attacks, email scams, and QR-code-based fraud. We created age-appropriate phishing scenarios with explanations to make the quiz more educational and realistic. These were shared with the team for implementation into the final game.
+ 
+ We also focused on testing early features such as OTP email verification and reviewed quiz difficulty levels to ensure they were suitable for different age groups. We also tested gameplay elements like score tracking and Memory Match unlock functionality and provided feedback for improvements.
+ 
+ We had similar quiz sets for eco snake quiz game and math quiz, so we arraned quick 2 minutes meeting to discuss. We wanted to remove snake quiz and add new game idea later.
+
+Throughout this week,We actively updated Trello boards, assigned tasks to the “To Do” stage, moved completed tasks into review/testing stages, and archived finished work. This helped improve team coordination and ensured a smooth workflow across all tasks.
+
+Overall, Week 2 focused on improving the educational quality of the quiz system, strengthening backend development, and improving team coordination through Agile tools like Trello and GitHub.
