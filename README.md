@@ -289,3 +289,14 @@ Password reset follows the same OTP flow via `Forgot Password`.
 ## License
 
 MIT — free to use, modify, and deploy.
+
+## Group Members - Detectives
+
+| # | GitHub Username | Profile |
+|---|---|---|
+| 1 | `Aaryut` | https://github.com/Aaryut |
+| 2 | `krishnaxtha14` | https://github.com/krishnaxtha14 |
+| 3 | `jinagiri` | https://github.com/jinagiri |
+| 4 | `pushpa57497-sketch` | https://github.com/pushpa57497-sketch |
+| 5 | `zay418` | https://github.com/zay418 |
+| 6 | `6870-cmd` | https://github.com/6870-cmd |
