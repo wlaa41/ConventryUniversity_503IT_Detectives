@@ -1,0 +1,59 @@
+Reviewed current progress of the cyber educational game project.
+<<<<<<< HEAD
+During the meeting, I contributed to the development of our project by focusing on the quiz game component. I suggested and helped structure two main quiz sections: a Cyber Security Quiz and a Math Quiz, both designed in a multiple-choice format for easy interaction and learning.
+I created a set of questions for both quizzes, ensuring they were simple, clear, and suitable for beginners. For the Cyber Security Quiz, I included topics such as phishing, malware, passwords, firewalls, and two-factor authentication. For the Math Quiz, I included basic arithmetic, percentages, and number patterns.
+I also organised the questions into a Trello-style structure with tasks and checklists to show the development progress. This helped the team track what has been completed and what still needs to be done, such as coding integration, testing, and final review.
+Overall, my role focused on content creation, planning, and preparing the quiz material for implementation into the final game
+Thankyou.
+i am jina giri and 
+I assign tasks to the “To Do” stage.
+I updated task cards regularly during progress.
+I tracked workflow stages from planning to completion.
+I moved completed tasks to the review/testing section.
+I archived finished tasks after completion.
+I helped improve team coordination and task management.
+I monitored project progress to ensure smooth workflow.
+=======
+During the meeting, I contributed to the development of our project by focusing 
+on the quiz game component. I suggested and helped structure two main quiz sections:
+ a Cyber Security Quiz and a Math Quiz, both designed in a multiple-choice format for 
+ easy interaction and learning.
+I created a set of questions for both quizzes, ensuring they were simple, clear, and 
+suitable for beginners. For the Cyber Security Quiz, I included topics such as phishing, 
+malware, passwords, firewalls, and two-factor authentication. For the Math Quiz, I 
+included basic arithmetic, percentages, and number patterns.
+I also organised the questions into a Trello-style structure with tasks and checklists to 
+show the development progress. This helped the team track what has been completed and what 
+still needs to be done, such as coding integration, testing, and final review.
+Overall, my role focused on content creation, planning, and preparing the quiz material for
+ implementation into the final game
+Thankyou.
+In our meeting, my contribution was doing Research on gaming scams, other emails, and QR-code
+ phishing examples.
+Creating age-appropriate phishing scenarios with educational explanations.
+Sharing final phishing quiz content with the team for implementation.
+
+
+ I am Pushparaj working as a tester and reviewer for the project. I tested the OTP email delivery system,
+ reviewed the quiz difficulty levels to ensure they were suitable for different age groups,
+  and checked the score tracking system to make sure points and unlock progress worked 
+  correctly. I also shared feedback with the team to help improve the overall user
+   experience and game quality.
+
+Mohammad Zayed alam
+   Worked on backend development and UI design tasks for the project,
+    including creating a secure Flask authentication system and planning eco-themed backgrounds. 
+    Contributed to route configuration, user authentication features, password security, 
+    and interface design improvements to enhance both functionality and user experience.
+
+Shree krishna shrestha
+  updating domain and publishing, also assigned supabase as DATABASE system
+
+  Aaryut
+  We updated our trello.
+  We had presentation on agile technique and we learned many things in class.
+  Understood the concept of agile and waterfall technique.
+  
+  
+  
+>>>>>>> 81e8eef165e7a154de61a068c6458c31c791f4df
