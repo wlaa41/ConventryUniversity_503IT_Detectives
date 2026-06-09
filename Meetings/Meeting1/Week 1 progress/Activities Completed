@@ -1,0 +1,16 @@
+Reviewed initial setup and early progress of the cyber educational game project.
+
+During Week 1, our team was introduced to the project structure and we organised ourselves into a group of six members named “Cyber Detectives”, assigning roles to all team members according to their strength and understanding to ensure clear responsibilities and workflow management.
+
+We uploaded and reviewed the initial project files from our previous “Pookie” system, including app.py, pooki.db, and README.md. After reviewing the codebase, I explained that the project is a Flask-based eco-themed learning quiz hub designed for children aged 6–12. The platform includes four mini-games: an auto-play Snake quiz, a Math quiz, a Cyber Security quiz, and a locked Memory Match game that unlocks after reaching 100 points.
+
+We also summarised the authentication system, which includes user registration, login, OTP email verification, and password reset functionality. The system uses SQLite as the database for storing user and game data.
+We made Trello board and everyone made their to do list cards and were assigned with jobs to make team cooperation and workflow easy.S
+
+We also identified missing components required for the application to run properly, including the question/JSON files, static folder (CSS and JavaScript files), and HTML templates. I highlighted that without these files, the application would not function correctly.
+
+Additionally, Pushpa also discovered a security issue in the current implementation, where sensitive information such as the Gmail address and app password were hard-coded inside app.py.when testing the math quiz design. Shree recommended moving these credentials to environment variables to improve security and follow best practices.
+
+We also learned basic GitHub workflow operations, including how to commit changes, push updates to the repository, and pull the latest version of the project. This helped improve our understanding of version control and team collaboration.
+
+Overall, Week 1 focused on understanding the project structure, identifying missing components, improving security awareness, and learning basic collaboration tools for team development.
