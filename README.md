@@ -290,13 +290,15 @@ Password reset follows the same OTP flow via `Forgot Password`.
 
 MIT — free to use, modify, and deploy.
 
-## Group Members - Detectives
+## 👥 Group Members — Detectives
 
-| # | GitHub Username | Profile |
-|---|---|---|
-| 1 | `Aaryut` | https://github.com/Aaryut |
-| 2 | `krishnaxtha14` | https://github.com/krishnaxtha14 |
-| 3 | `jinagiri` | https://github.com/jinagiri |
-| 4 | `pushpa57497-sketch` | https://github.com/pushpa57497-sketch |
-| 5 | `zay418` | https://github.com/zay418 |
-| 6 | `6870-cmd` | https://github.com/6870-cmd |
+> **Note:** The numbers listed are **Student Numbers** assigned by Coventry University.
+>
+> | # | Full Name | Student Number | GitHub Username | GitHub Profile | Role |
+> |---|-----------|---------------|-----------------|----------------|------|
+> | 1 | Shree Krishna Shrestha | 15681041 | `krishnaxtha14` | https://github.com/krishnaxtha14 | Coding, Designing & Publishing App (Frontend & Backend) |
+> | 2 | Saif Ullah | 16115000 | `6870-cmd` | https://github.com/6870-cmd | Lead Content & Game Idea |
+> | 3 | Aaryut Chaudhary | 16069541 | `Aaryut` | https://github.com/Aaryut | Researcher & Scrum Concept |
+> | 4 | Jina Giri | 16144790 | `jinagiri` | https://github.com/jinagiri | Prototype Designer |
+> | 5 | Mohammad Zayed Alam | 16090763 | `zay418` | https://github.com/zay418 | Project Manager |
+> | 6 | Pushparaj Mahato | 16362947 | `pushpa57497-sketch` | https://github.com/pushpa57497-sketch | Tester & Reviewer / Bug Finder |
