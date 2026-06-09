@@ -1,0 +1,17 @@
+Reviewed final progress of the cyber educational game project.
+
+During Week 4, our team focused on final development, testing, presentation delivery, and overall project refinement. At this stage, most of the core features of the BuzzXZone platform had been developed, so the focus shifted towards improving interactivity, polishing the user experience, and ensuring all components worked smoothly together.
+
+A major activity this week was preparing and delivering our project presentation. As a team, we presented the BuzzXZone educational game, explaining its purpose, features, mini-games, and learning objectives. Through this presentation, we also received feedback and learned how to improve communication, structure our explanation more clearly, and present technical ideas in a more professional way.
+
+After the presentation, we continued improving our project based on testing and feedback. We updated our Trello board with detailed descriptions of tasks and added evidence such as screenshots of development progress. This helped clearly document what each team member had researched, built, and contributed to the project.
+
+We also focused heavily on testing and improving game functionality. During this stage, we tested all four mini-games and ensured they were working correctly. We added audio feedback for correct and incorrect answers, as well as background music to make the experience more engaging. These improvements were especially important as the game is designed for children aged 6–12 years, so we focused on making the interface more interactive, fun, and easy to understand.
+
+Additionally, we improved the deployment environment by setting up a Vercel-based hosting environment, ensuring the project could be accessed online. We also created a proper Vercel user deployment setup to support smoother testing and sharing of the application.
+
+The team also improved project organisation by keeping the GitHub repository updated, maintaining proper commit history, and ensuring all workflows and meeting notes were recorded. Trello became more structured and organised, with clearer task descriptions and updated progress tracking.
+
+Throughout this week, all team members completed their assigned tasks effectively, and the project became more stable and polished. We also reviewed and refined UI/UX design elements to ensure the platform was visually appealing and suitable for younger users, making the learning experience more engaging and interactive.
+
+Overall, Week 4 focused on final testing, presentation delivery, system improvements, deployment setup, and polishing the project to ensure a complete and professional educational game platform.
