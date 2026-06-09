@@ -5,7 +5,11 @@ I created a set of questions for both quizzes, ensuring they were simple, clear,
 I also organised the questions into a Trello-style structure with tasks and checklists to show the development progress. This helped the team track what has been completed and what still needs to be done, such as coding integration, testing, and final review.
 Overall, my role focused on content creation, planning, and preparing the quiz material for implementation into the final game
 Thankyou.
+<<<<<<< Updated upstream
 i am jina giri and 
+=======
+Jina Giri My contribuition on 
+>>>>>>> Stashed changes
 I assign tasks to the “To Do” stage.
 I updated task cards regularly during progress.
 I tracked workflow stages from planning to completion.

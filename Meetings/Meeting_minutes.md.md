@@ -5,7 +5,7 @@
 - **Date:** 27 May 2026
 - **Time:** 2:00 PM – 3:00 PM
 - **Location:** CU London Campus
-- **Chair:** Shree Krishna Shrestha
+- **Chair:** jina Giri
 - **Minute-Taker:** Mohammad
 
 ## Attendees
