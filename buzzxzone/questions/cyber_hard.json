@@ -43,5 +43,14 @@
    "correct": 1},
   {"q": "Which best describes the 'defence in depth' security principle?",
    "answers": ["Relying on one powerful firewall at the network perimeter", "Applying multiple, independent layers of security controls throughout a system", "Encrypting every file on every device with AES-256", "Forcing users to change passwords every 30 days"],
+   "correct": 1},
+  {"q": "What is a 'man-in-the-middle' (MITM) attack?",
+   "answers": ["Physically stealing a device from a user", "Intercepting communication between two parties without their knowledge", "Flooding a server with requests to crash it", "Guessing passwords through brute force"],
+   "correct": 1},
+  {"q": "What does PKI (Public Key Infrastructure) provide?",
+   "answers": ["A way to store passwords securely in a database", "A framework for managing digital certificates and public-key encryption", "A type of firewall configuration", "A protocol for sending emails securely"],
+   "correct": 1},
+  {"q": "In OAuth 2.0, what is an 'access token' used for?",
+   "answers": ["To authenticate the user's identity permanently", "To grant limited access to a resource on behalf of a user", "To encrypt the user's password during login", "To store the user's session data on the server"],
    "correct": 1}
 ]
