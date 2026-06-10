@@ -410,6 +410,22 @@ def api_progress():
     return jsonify({"ok": True, **get_user_progress(session["user_id"])})
 
 
+@app.route("/api/leaderboard")
+def api_leaderboard():
+    if "user_id" not in session:
+        return jsonify({"ok": False}), 401
+    conn = get_db()
+    rows = conn.execute(
+        "SELECT username, high_score FROM users ORDER BY high_score DESC LIMIT 10"
+    ).fetchall()
+    conn.close()
+    return jsonify({
+        "ok": True,
+        "leaderboard": [{"rank": i+1, "username": r["username"], "score": r["high_score"]}
+                        for i, r in enumerate(rows)]
+    })
+
+
 # ─────────────────────────────────────────────
 if __name__ == "__main__":
     app.run(debug=True)
