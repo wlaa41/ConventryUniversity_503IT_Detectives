@@ -315,6 +315,13 @@ function finishQuiz() {
     🎯 You scored <strong>${score}</strong> points
     (${correct} of ${QUESTIONS.length} correct — <strong>${pct}%</strong> accuracy).
   `;
+  const playAgainBtn = document.createElement('a');
+  playAgainBtn.href      = window.location.href;
+  playAgainBtn.className = 'overlay-btn';
+  playAgainBtn.style.cssText = 'display:inline-block;margin-top:18px;';
+  playAgainBtn.textContent   = '🔄 Play Again';
+  elDoneMsg.appendChild(playAgainBtn);
+
   saveScore(score, true).then(data => {
     if (data && data.ok) {
       const extra = document.createElement('p');
