@@ -13,5 +13,9 @@
   {"q": "What is the gradient between (2,4) and (6,12)?","answers": ["1", "2", "3", "4"],                "correct": 1, "hint": "Gradient = (y2-y1)/(x2-x1) = (12-4)/(6-2) = 8/4 = 2"},
   {"q": "Factorise: x^2 + 5x + 6",                      "answers": ["(x+1)(x+6)", "(x+2)(x+3)", "(x+2)(x+4)", "(x+3)(x+4)"], "correct": 1, "hint": "Find two numbers: multiply to 6 AND add to 5 → 2 and 3. So: (x+2)(x+3)"},
   {"q": "What is 30% of 30% of 1000?",                   "answers": ["9", "30", "90", "300"],            "correct": 2, "hint": "30% of 1000=300. Then 30% of 300=90"},
-  {"q": "Volume of a cube with side 4 cm?",              "answers": ["12 cm3", "24 cm3", "48 cm3", "64 cm3"], "correct": 3, "hint": "Volume = side^3 = 4^3 = 4x4x4 = 64 cm3"}
+  {"q": "Volume of a cube with side 4 cm?",              "answers": ["12 cm3", "24 cm3", "48 cm3", "64 cm3"], "correct": 3, "hint": "Volume = side^3 = 4^3 = 4x4x4 = 64 cm3"},
+  {"q": "Expand and simplify: (x + 3)(x - 2)",          "answers": ["x^2 + x - 5", "x^2 + x - 6", "x^2 - x - 6", "x^2 + 5x - 6"], "correct": 1, "hint": "FOIL: x*x=x^2, x*(-2)=-2x, 3*x=3x, 3*(-2)=-6. Sum: x^2 + x - 6"},
+  {"q": "Solve: 5(x - 2) = 3(x + 4). x = ?",            "answers": ["9", "10", "11", "13"],               "correct": 2, "hint": "Expand: 5x-10=3x+12. Subtract 3x: 2x-10=12. Add 10: 2x=22. Divide: x=11"},
+  {"q": "What is the area of a triangle with base 10 cm and height 7 cm?", "answers": ["17 cm2", "35 cm2", "42 cm2", "70 cm2"], "correct": 1, "hint": "Area = (base × height) ÷ 2 = (10 × 7) ÷ 2 = 70 ÷ 2 = 35 cm²"},
+  {"q": "What is the value of 4! (4 factorial)?",        "answers": ["8", "16", "24", "32"],               "correct": 2, "hint": "n! = n × (n-1) × ... × 1. So 4! = 4×3×2×1 = 24"}
 ]
