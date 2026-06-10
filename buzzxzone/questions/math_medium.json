@@ -13,5 +13,9 @@
   {"q": "What is 15% of 60?",                     "answers": ["6", "9", "12", "15"],             "correct": 1, "hint": "10% of 60=6, then 5% of 60=3. Add them: 6+3=9"},
   {"q": "What is 144 / 12?",                      "answers": ["10", "11", "12", "13"],           "correct": 2, "hint": "12x12=144. So 144/12=12"},
   {"q": "What is the area of a 6x4 rectangle?",   "answers": ["20", "22", "24", "26"],           "correct": 2, "hint": "Area = length x width = 6x4=24 square units"},
-  {"q": "What is 2/3 + 1/3?",                     "answers": ["1/3", "2/3", "1", "4/3"],         "correct": 2, "hint": "Same denominator: just add numerators: 2+1=3, over 3: 3/3=1"}
+  {"q": "What is 2/3 + 1/3?",                     "answers": ["1/3", "2/3", "1", "4/3"],         "correct": 2, "hint": "Same denominator: just add numerators: 2+1=3, over 3: 3/3=1"},
+  {"q": "A jacket costs £80. There is a 25% discount. How much do you pay?", "answers": ["£55", "£60", "£65", "£70"], "correct": 1, "hint": "25% of 80=20. Subtract: 80-20=60"},
+  {"q": "What is 3/4 of 48?",                     "answers": ["24", "30", "36", "40"],           "correct": 2, "hint": "48/4=12 (one quarter). Then 12x3=36 (three quarters)"},
+  {"q": "What is 5^2 - 4^2?",                     "answers": ["3", "7", "9", "11"],              "correct": 2, "hint": "5^2=25, 4^2=16. Subtract: 25-16=9"},
+  {"q": "What is the perimeter of a square with side 9 cm?", "answers": ["27 cm", "36 cm", "45 cm", "81 cm"], "correct": 1, "hint": "Perimeter = 4 × side = 4 × 9 = 36 cm"}
 ]
