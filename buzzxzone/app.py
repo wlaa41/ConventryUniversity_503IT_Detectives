@@ -70,8 +70,14 @@ init_db()
 def send_otp_email(to_email, otp):
     sender_email    = os.environ.get("GMAIL_USER", "")
     sender_password = os.environ.get("GMAIL_PASSWORD", "")
-    msg = MIMEText(f"Your Cyber OTP is: {otp}")
-    msg["Subject"] = "Cyber Verification Code"
+    body = (
+        f"Hi there,\n\n"
+        f"Your buzzXzone verification code is: {otp}\n\n"
+        f"This code expires in 5 minutes. Do not share it with anyone.\n\n"
+        f"— The buzzXzone Team 🌿"
+    )
+    msg = MIMEText(body)
+    msg["Subject"] = "🌿 buzzXzone — Your verification code"
     msg["From"]    = sender_email
     msg["To"]      = to_email
     try:
