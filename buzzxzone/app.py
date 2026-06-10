@@ -232,7 +232,7 @@ def forgot():
         ).fetchone()
         conn.close()
         if not user:
-            error = "Email not found!"
+            error = "No account found with that email address."
         else:
             otp = str(random.randint(100000, 999999))
             session["reset_otp"]    = otp
