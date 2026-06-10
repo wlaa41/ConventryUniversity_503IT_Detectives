@@ -262,8 +262,11 @@ def new_password():
         return redirect("/forgot")
     error = ""
     if request.method == "POST":
+        new_pw = request.form["password"]
         if request.form["password"] != request.form["confirm"]:
             error = "Passwords do not match!"
+        elif len(new_pw) < 8:
+            error = "Password must be at least 8 characters long."
         else:
             conn = get_db()
             conn.execute(
