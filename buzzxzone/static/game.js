@@ -330,7 +330,7 @@ function drawCanvas() {
     ctx.font         = `${CELL - 4}px serif`;
     ctx.textAlign    = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('⚡', leaf.x*CELL + CELL/2, leaf.y*CELL + CELL/2);
+    ctx.fillText('🌿', leaf.x*CELL + CELL/2, leaf.y*CELL + CELL/2);
   }
 
   /* Snake body */
