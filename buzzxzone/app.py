@@ -454,7 +454,7 @@ def health():
     return jsonify({
         "status":   "ok" if db_status == "connected" else "degraded",
         "database": db_status,
-        "version":  "1.0.0",
+        "version":  APP_VERSION,
     })
 
 
