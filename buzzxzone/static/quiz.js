@@ -352,5 +352,12 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+// ── Escape key closes tutorial and starts quiz directly ───────
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !elTutOverlay.classList.contains('hidden')) {
+    startQuiz();
+  }
+});
+
 // ── Boot: build tutorial then wait for user click ────────────
 buildTutorial();
