@@ -20,6 +20,7 @@ QUESTIONS_DIR     = os.path.join(BASE_DIR, "questions")
 QUESTION_TIME_SEC = 20            # 20 seconds per question (hard cap)
 POINTS_PER_Q      = 10            # 10 points per correct answer
 UNLOCK_THRESHOLD  = 100           # Best score needed to unlock memory match
+APP_VERSION       = "1.0.0"
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "supersecretkey-change-in-production")
