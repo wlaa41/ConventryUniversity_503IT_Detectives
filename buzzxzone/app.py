@@ -427,5 +427,24 @@ def api_leaderboard():
 
 
 # ─────────────────────────────────────────────
+# HEALTH CHECK
+# ─────────────────────────────────────────────
+@app.route("/health")
+def health():
+    try:
+        conn = get_db()
+        conn.execute("SELECT 1").fetchone()
+        conn.close()
+        db_status = "connected"
+    except Exception as e:
+        db_status = f"error: {e}"
+    return jsonify({
+        "status":   "ok" if db_status == "connected" else "degraded",
+        "database": db_status,
+        "version":  "1.0.0",
+    })
+
+
+# ─────────────────────────────────────────────
 if __name__ == "__main__":
     app.run(debug=True)
