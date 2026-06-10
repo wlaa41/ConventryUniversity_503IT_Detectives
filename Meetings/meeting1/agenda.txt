@@ -1,0 +1,13 @@
+Meeting 1 Agenda — buzzXzone (Cyber Detectives)
+Date: 27 May 2026 | Time: 2:00 PM | Location: CU London Campus
+
+1. Introduction and project overview
+2. Review initial codebase (app.py, database, README.md)
+3. Assign team roles and responsibilities
+4. Identify missing components
+5. Discuss security issues (hard-coded credentials)
+6. Set up GitHub and Trello
+7. Plan Week 1 deliverables
+
+Members: Jina Giri, Shree Krishna Shrestha, Aaryut Chaudhary, Saif Ullah,
+         Mohammad Zayed Alam, Pushparaj Mahato
