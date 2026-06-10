@@ -330,5 +330,18 @@ function finishQuiz() {
   });
 }
 
+// ── Keyboard shortcuts: keys 1-4 map to answer buttons ───────
+document.addEventListener('keydown', (e) => {
+  if (answered) return;
+  const map = {'1':0, '2':1, '3':2, '4':3};
+  if (map[e.key] !== undefined) {
+    const btns = elAnswers.querySelectorAll('.ans-btn');
+    if (btns[map[e.key]] && !btns[map[e.key]].disabled) {
+      addRipple(btns[map[e.key]], { clientX: 0, clientY: 0 });
+      handleAnswer(map[e.key], false);
+    }
+  }
+});
+
 // ── Boot: build tutorial then wait for user click ────────────
 buildTutorial();
