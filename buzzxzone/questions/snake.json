@@ -38,5 +38,15 @@
   {"q": "A garden needs 7 litres daily. How much for 3 days?",
    "answers": ["18", "20", "21", "24"], "correct": 2},
   {"q": "50 apples split into 5 baskets equally. Apples each?",
-   "answers": ["5", "8", "10", "12"], "correct": 2}
+   "answers": ["5", "8", "10", "12"], "correct": 2},
+  {"q": "A wind turbine saves 45 kg of CO2 in 9 days. Daily saving?",
+   "answers": ["3 kg", "4 kg", "5 kg", "6 kg"], "correct": 2},
+  {"q": "You plant 7 seeds each week for 4 weeks. Total seeds planted?",
+   "answers": ["21", "24", "28", "32"], "correct": 2},
+  {"q": "A stream has 90 fish. 30 are removed for conservation. Fish left?",
+   "answers": ["50", "55", "60", "65"], "correct": 2},
+  {"q": "Each student collects 9 cans. 8 students attend. Total cans?",
+   "answers": ["63", "64", "72", "81"], "correct": 2},
+  {"q": "A rain barrel fills 6 litres per hour. How full after 7 hours?",
+   "answers": ["36 L", "40 L", "42 L", "48 L"], "correct": 2}
 ]
