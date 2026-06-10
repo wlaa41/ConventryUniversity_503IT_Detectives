@@ -309,9 +309,11 @@ function saveScore(currentScore, isFinal) {
 function finishQuiz() {
   elQuizCard.classList.add('hidden');
   elDone.classList.remove('hidden');
+  const correct = score / POINTS_PER_Q;
+  const pct     = QUESTIONS.length > 0 ? Math.round((correct / QUESTIONS.length) * 100) : 0;
   elDoneMsg.innerHTML = `
     🎯 You scored <strong>${score}</strong> points
-    (${score / POINTS_PER_Q} of ${QUESTIONS.length} correct).
+    (${correct} of ${QUESTIONS.length} correct — <strong>${pct}%</strong> accuracy).
   `;
   saveScore(score, true).then(data => {
     if (data && data.ok) {
