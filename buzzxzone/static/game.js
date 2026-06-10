@@ -138,6 +138,7 @@ function tick() {
 
   drawCanvas();
   updateHUD();
+  checkLengthWarning();
 }
 
 // ── Per-question timer (1 minute) ───────────────────────────────
@@ -355,6 +356,21 @@ function roundRect(c, x, y, w, h, r) {
   c.lineTo(x + r, y + h); c.quadraticCurveTo(x, y + h, x, y + h - r);
   c.lineTo(x, y + r); c.quadraticCurveTo(x, y, x + r, y);
   c.closePath();
+}
+
+// ── Warn player when snake is dangerously short ──────────────────
+const WARN_LEN = 3;
+
+function checkLengthWarning() {
+  const hud = document.getElementById('hud-length');
+  if (!hud) return;
+  if (snake && snake.length <= WARN_LEN) {
+    hud.style.color  = '#ff4444';
+    hud.style.fontWeight = 'bold';
+  } else {
+    hud.style.color  = '';
+    hud.style.fontWeight = '';
+  }
 }
 
 // ── Set total question count in HUD (template gives JSON string length, not count) ──
