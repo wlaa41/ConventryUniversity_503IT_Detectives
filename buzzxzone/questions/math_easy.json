@@ -13,5 +13,9 @@
   {"q": "What is 3 x 1?",                         "answers": ["1", "2", "3", "4"],              "correct": 2, "hint": "Anything multiplied by 1 stays the same!"},
   {"q": "What is 2 + 2 + 2?",                     "answers": ["4", "5", "6", "7"],              "correct": 2, "hint": "Add step by step: 2+2=4, then 4+2=6"},
   {"q": "What comes after 19?",                   "answers": ["18", "20", "21", "22"],           "correct": 1, "hint": "Count one more after 19: ...18, 19, 20!"},
-  {"q": "What is 8 - 5?",                         "answers": ["2", "3", "4", "5"],              "correct": 1, "hint": "Count back from 8: 7, 6, 5. That's 3 steps!"}
+  {"q": "What is 8 - 5?",                         "answers": ["2", "3", "4", "5"],              "correct": 1, "hint": "Count back from 8: 7, 6, 5. That's 3 steps!"},
+  {"q": "What is 4 + 4?",                         "answers": ["6", "7", "8", "9"],              "correct": 2, "hint": "Double 4: 4+4=8. Doubles are easy to remember!"},
+  {"q": "What is 10 - 3?",                        "answers": ["5", "6", "7", "8"],              "correct": 2, "hint": "Count back 3 from 10: 9, 8, 7!"},
+  {"q": "What is 2 x 5?",                         "answers": ["7", "8", "10", "12"],            "correct": 2, "hint": "2x5: count in 5s twice: 5, 10!"},
+  {"q": "How many sides does a triangle have?",   "answers": ["2", "3", "4", "5"],              "correct": 1, "hint": "Tri means three — a triangle has 3 sides!"}
 ]
