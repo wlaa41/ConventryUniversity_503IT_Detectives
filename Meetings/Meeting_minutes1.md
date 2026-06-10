@@ -1,71 +1,91 @@
-# Meeting Minutes
+# Meeting Minutes — Meeting 1
 
-## Meeting Details
+**Project:** buzzXzone — Eco Learning Quiz Hub
+**Date:** 27 May 2026
+**Time:** 2:00 PM – 3:00 PM
+**Location:** Coventry University London Campus
+**Chair:** Jina Giri
+**Minute-Taker:** Mohammad Zayed Alam
 
-- **Date:** 27 May 2026
-- **Time:** 2:00 PM – 3:00 PM
-- **Location:** CU London Campus
-- **Chair:** jina Giri
-- **Minute-Taker:** Mohammad
+---
 
 ## Attendees
 
-- Jina
+- Jina Giri
 - Shree Krishna Shrestha
-- Aaryut
+- Aaryut Chaudhary
 - Saif Ullah
-- Mohammad
+- Mohammad Zayed Alam
+- Pushparaj Mahato
+
+---
 
 ## Agenda Items
 
-1. Finalize puzzle game concept
-2. Discuss game features
-3. Assign team responsibilities
+1. Review initial project codebase
+2. Discuss platform features and game design
+3. Assign team roles and responsibilities
 4. Plan Agile development process
+5. Set up GitHub and Trello
+
+---
 
 ## Summary of Discussion
 
-- The team agreed to develop a multi-level logic puzzle game.
-- Main features selected:
-  - Multiple levels
-  - Timer
-  - Scoring system
-  - Hints
-  - Sound effects
-  - Pause/Resume
-  - Game over screen
-- Agile Scrum methodology was chosen for project development.
-- Weekly sprints were planned for design, development, testing, and final improvements.
-- GitHub will be used for version control and Trello for task management.
+The team reviewed the initial project files (Flask application, database, README) uploaded from
+the prototype. The platform was identified as a Flask-based eco-themed educational quiz hub
+for children aged 6–12.
+
+**Features agreed for development:**
+- Auto-play Eco Snake Quiz (no motor-skill barrier)
+- Math Quiz (Easy / Medium / Hard)
+- Eco Cyber-Security Quiz (Easy / Medium / Hard)
+- Memory Match mini-game (locked, unlocks at 100 points)
+- OTP email authentication
+- Score tracking with persistent high score
+
+Agile Scrum methodology was chosen. Weekly sprints were planned. GitHub is used for version
+control and Trello for task tracking.
+
+**Security issue raised:** Gmail credentials were found hard-coded in `app.py`. The team
+agreed to move all sensitive credentials to environment variables immediately.
+
+---
 
 ## Decisions Made
 
-- Puzzle game concept approved.
-- Team roles and responsibilities assigned.
-- Prototype to be completed within 2 weeks.
-- Regular progress updates and testing after each sprint.
+- Platform concept approved — eco educational quiz hub
+- All six roles assigned (Developer, Designer, PM, Content Lead, Researcher, Tester)
+- Prototype to be submission-ready within 2 weeks
+- Credentials to be moved to `.env` before any code sharing
 
-## My Assigned Task
+---
 
-### Role: UI/UX Designer
+## Role Assignments
 
-#### Responsibilities
+| Member | Role |
+|--------|------|
+| Shree Krishna Shrestha | Lead Developer (Frontend + Backend) |
+| Saif Ullah | Content Lead (questions, game concept) |
+| Aaryut Chaudhary | Researcher & Scrum Facilitator |
+| Jina Giri | UI/UX Designer |
+| Mohammad Zayed Alam | Project Manager |
+| Pushparaj Mahato | Tester & QA Reviewer |
 
-- Prepare project documentation.
-- Record meeting minutes.
-- Create presentation slides.
-- Maintain project reports and progress records.
+---
 
 ## Action Items
 
-| Task | Deadline |
-|------|----------|
-| Prepare meeting minutes | Completed |
-| Create project documentation structure | Week 1 |
-| Start presentation preparation | Before final submission |
+| Task | Assigned To | Deadline |
+|------|-------------|----------|
+| Move credentials to `.env` | Shree Krishna | Week 2 |
+| Create question JSON files (initial) | Aaryut, Saif | Week 2 |
+| Design dashboard wireframes | Jina | Week 2 |
+| Set up Trello task board | Mohammad | Week 1 |
+| Test auth flow end-to-end | Pushparaj | Week 2 |
+
+---
 
 ## Next Meeting
 
-- **Date:** 3 June 2026
-- **Time:** 2:00 PM
-- **Agenda:** Review prototype progress and discuss improvements.
+**Date:** 29 May 2026 — Review wireframes and plan Sprint 2.
