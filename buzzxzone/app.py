@@ -192,7 +192,7 @@ def login():
         ).fetchone()
         conn.close()
         if not user or not check_password_hash(user["password"], request.form["password"]):
-            error = "Invalid credentials!"
+            error = "Incorrect email or password. Please try again."
         else:
             otp = str(random.randint(100000, 999999))
             session["otp"]        = otp
