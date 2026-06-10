@@ -177,6 +177,13 @@ function openQuestion() {
   show(questionBox);
 }
 
+// ── Keyboard shortcuts: keys 1-4 map to answer buttons ──────────
+document.addEventListener('keydown', (e) => {
+  if (!questionOpen) return;
+  const map = {'1':0, '2':1, '3':2, '4':3};
+  if (map[e.key] !== undefined) handleAnswer(map[e.key]);
+});
+
 // ── Player answers ──────────────────────────────────────────────
 function handleAnswer(index) {
   if (!questionOpen) return;
