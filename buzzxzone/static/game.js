@@ -268,11 +268,15 @@ function endGame(message, win) {
   clearInterval(timerLoopId);
   hide(questionBox);
 
+  const correct = Math.round(score / POINTS_PER_Q);
+  const pct     = QUESTIONS.length > 0 ? Math.round((correct / QUESTIONS.length) * 100) : 0;
+
   overTitle.className   = win ? 'overlay-title yellow' : 'overlay-title red';
   overTitle.textContent = win ? '🏆 QUEST COMPLETE!'    : '💀 GAME OVER';
   overMessage.innerHTML = `${message}<br><br>
     Score: <strong>${score}</strong> &nbsp;|&nbsp;
-    Questions answered: <strong>${qIndex}</strong>/${QUESTIONS.length}`;
+    Correct: <strong>${correct}/${QUESTIONS.length}</strong> &nbsp;|&nbsp;
+    Accuracy: <strong>${pct}%</strong>`;
   show(overScreen);
 
   // Final submission (also keepalive so it survives any navigation).
