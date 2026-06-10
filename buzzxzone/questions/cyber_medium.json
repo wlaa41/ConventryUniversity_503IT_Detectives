@@ -43,5 +43,14 @@
    "correct": 1},
   {"q": "Which is the MOST secure way to store multiple strong passwords?",
    "answers": ["Write them in a notebook by your computer", "Use a reputable password manager app", "Reuse one strong password everywhere", "Save them in a browser on a shared computer"],
+   "correct": 1},
+  {"q": "What does a VPN primarily do?",
+   "answers": ["Speeds up your internet connection", "Encrypts your traffic and masks your IP address", "Removes viruses from your device", "Blocks all advertisements automatically"],
+   "correct": 1},
+  {"q": "What is a 'zero-day' vulnerability?",
+   "answers": ["A bug that takes zero days to fix", "A flaw unknown to the vendor with no patch available yet", "A server that has been offline for zero days", "A password that expires immediately"],
+   "correct": 1},
+  {"q": "Which behaviour best protects you from social engineering attacks?",
+   "answers": ["Using strong passwords on all accounts", "Verifying identities before sharing any sensitive information", "Installing antivirus software", "Using a VPN on public Wi-Fi"],
    "correct": 1}
 ]
