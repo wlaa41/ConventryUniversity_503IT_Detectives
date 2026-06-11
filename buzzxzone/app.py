@@ -52,7 +52,6 @@ def init_db():
             memory_unlocked INTEGER NOT NULL DEFAULT 0
         )
     """)
-    # Migration: if an older users table exists without these columns, add them.
     existing_cols = {row[1] for row in cur.execute("PRAGMA table_info(users)").fetchall()}
     if "high_score" not in existing_cols:
         cur.execute("ALTER TABLE users ADD COLUMN high_score INTEGER NOT NULL DEFAULT 0")
