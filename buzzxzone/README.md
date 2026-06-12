@@ -1,4 +1,4 @@
-# 🌿 Cyber — Eco Learning Quiz Hub
+# *buzzxzone** — Eco Learning Quiz Hub
 
 A Flask web app featuring **Cyber**: an eco-themed learning hub for ages 6–12 with an auto-playing snake quiz, a math quiz, an eco-friendly cyber-security quiz, and an unlockable memory-match mini-game.
 
